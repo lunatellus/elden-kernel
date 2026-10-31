@@ -1,0 +1,33 @@
+--- a/fs/read_write.c
++++ b/fs/read_write.c
+@@ -720,14 +720,14 @@
+ 
+ #ifdef CONFIG_KSU_SUSFS
+ extern struct static_key_true ksu_is_init_rc_hook_enabled;
+-extern __attribute__((cold)) void ksu_handle_sys_read(unsigned int fd);
++extern int ksu_handle_sys_read(unsigned int fd, char __user **buf_ptr, size_t *count_ptr);
+ #endif
+ 
+ SYSCALL_DEFINE3(read, unsigned int, fd, char __user *, buf, size_t, count)
+ {
+ #ifdef CONFIG_KSU_SUSFS
+ 	if (static_branch_unlikely(&ksu_is_init_rc_hook_enabled))
+-		ksu_handle_sys_read(fd);
++		ksu_handle_sys_read(fd, &buf, &count);
+ #endif
+ 
+ 	return ksys_read(fd, buf, count);
+--- a/fs/notify/fdinfo.c
++++ b/fs/notify/fdinfo.c
+@@ -180,7 +180,11 @@
+ 
+ #ifdef CONFIG_FANOTIFY
+ 
++#if defined(CONFIG_KSU_SUSFS_SUS_MOUNT) || defined(CONFIG_KSU_SUSFS_SUS_KSTAT)
++static void fanotify_fdinfo(struct seq_file *m, struct fsnotify_mark *mark, struct file *file)
++#else
+ static void fanotify_fdinfo(struct seq_file *m, struct fsnotify_mark *mark)
++#endif
+ {
+ 	unsigned int mflags = fanotify_mark_user_flags(mark);
+ 	struct inode *inode;
