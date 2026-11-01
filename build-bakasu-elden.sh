@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-export BUILD_NUMBER=""
+BUILD_NUMBER=$(/usr/bin/shuf -i 10000000-99999999 -n 1)
+export BUILD_NUMBER
 
 ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 source "$ROOT/boot.conf"
@@ -215,6 +216,7 @@ main() {
             printf '%s %s\n' "$tool" "$(git -C "$WORK/$tool" rev-parse HEAD)"
         done
         printf 'AnyKernel3-tools %s\n' "$(git -C "$WORK/AnyKernel3" rev-parse refs/remotes/origin/arm64-tools)"
+        printf 'BUILD_NUMBER %s\n' "$BUILD_NUMBER"
         cat "$KERNEL/common/drivers/bakasu/kernel/elden-version.mk"
         cd "$ROOT"
         sha256sum patches/*.patch kernel.fragment boot.conf anykernel.sh build-bakasu-elden.sh
