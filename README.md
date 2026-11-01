@@ -37,6 +37,8 @@ SUSFS 接入使用上游 6.12 补丁和补充源码，`patches/` 保存 Kleaf �
 
 BBRv3 使用 `patches/bbr3-android16-6.12.patch` 接入，基于 [WildKernels/kernel_patches](https://github.com/WildKernels/kernel_patches/tree/main/common/bbrv3) 的 Android 16 / 6.12 回移适配 ACK，保留 CUBIC 和 ACK 原有的 BBR 算法。
 
+ADIOS 使用 `patches/adios-android16-6.12.patch` 接入，基于 [firelzrd/adios](https://github.com/firelzrd/adios) 的 6.12 / 3.3.0 补丁，补齐分配失败处理，保留 mq-deadline、Kyber 和 BFQ。
+
 ## 配置和打包
 
 `kernel.fragment` 选择内置 BakaSU 和 SUSFS，并清空 `MODULE_SIG_PROTECT_LIST`，关闭派生的 `MODULE_SIG_PROTECT`。其他配置继承上游默认值。
