@@ -31,3 +31,21 @@
  {
  	unsigned int mflags = fanotify_mark_user_flags(mark);
  	struct inode *inode;
+--- a/fs/susfs.c
++++ b/fs/susfs.c
+@@ -172,6 +172,7 @@
+ 	}
+ }
+ 
++#ifdef CONFIG_KSU_SUSFS_PRIORITY_UID_FILTER
+ /*
+  * Switches the selinux domain of the current process to the KernelSU one, so
+  * that the data paths of the apps can be accessed despite of the selinux
+@@ -220,6 +221,7 @@
+ 
+ 	commit_creds(orig_cred);
+ }
++#endif
+ 
+ /* sus_path */
+ #ifdef CONFIG_KSU_SUSFS_SUS_PATH
