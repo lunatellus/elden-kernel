@@ -48,7 +48,7 @@ SUSFS 接入使用上游 6.12 补丁和补充源码，`patches/` 保存 Kleaf �
 | 密钥 | AOSP `external/avb/test/data/testkey_rsa4096.pem` 公开测试私钥 |
 | OS version 属性 | 17 |
 | security_patch 属性 | 2026-08-01 |
-| rollback index | 1785542400 |
+| rollback index | 1790812800 |
 
 签名阶段复用 ACK 的 `avbtool`，为 Kleaf 生成的完整 boot 重建 96 MiB AVB footer、写入上述属性并签名。`verify_image` 校验签名和 boot 哈希。
 
