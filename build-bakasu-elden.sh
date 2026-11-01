@@ -116,6 +116,8 @@ check_config() {
     local config=$1
     grep -qx 'CONFIG_KSU=y' "$config" || fail "BakaSU is not built in"
     grep -qx 'CONFIG_KSU_SUSFS=y' "$config" || fail "SUSFS is not enabled"
+    grep -qx 'CONFIG_TCP_CONG_BBR3=y' "$config" || fail "BBRv3 is not built in"
+    grep -qx 'CONFIG_DEFAULT_TCP_CONG="bbr3"' "$config" || fail "BBRv3 is not the default TCP congestion control"
     if grep -qx 'CONFIG_MODULE_SIG_PROTECT=y' "$config"; then
         fail "MODULE_SIG_PROTECT is still enabled"
     fi

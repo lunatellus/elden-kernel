@@ -1,6 +1,6 @@
 # Elden kernel
 
-独立构建 Elden 的 BakaSU + SUSFS 内核，生成 Image、AVB2 签名 boot 和 AnyKernel3 ZIP。
+独立构建 Elden 的 BakaSU + SUSFS 内核，默认使用 BBRv3 拥塞控制，生成 Image、AVB2 签名 boot 和 AnyKernel3 ZIP。
 
 ## 构建
 
@@ -34,6 +34,8 @@ JOBS=8 ./build-bakasu-elden.sh
 BakaSU 获取完整历史和标签。构建前从实际 Git checkout 生成提交数、标签、短 SHA 和分支信息，Kbuild 使用上游公式计算版本码。Kleaf 在 sandbox 中读取生成的版本元数据，版本标识使用 `-dirty` 标记本地构建适配。
 
 SUSFS 接入使用上游 6.12 补丁和补充源码，`patches/` 保存 Kleaf 和接口兼容适配。补丁应用失败时脚本退出并显示错误。
+
+BBRv3 使用 `patches/bbr3-android16-6.12.patch` 接入，基于 [WildKernels/kernel_patches](https://github.com/WildKernels/kernel_patches/tree/main/common/bbrv3) 的 Android 16 / 6.12 回移适配 ACK，保留 CUBIC 和 ACK 原有的 BBR 算法。
 
 ## 配置和打包
 
