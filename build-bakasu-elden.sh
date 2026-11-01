@@ -118,6 +118,7 @@ check_config() {
     grep -qx 'CONFIG_KSU=y' "$config" || fail "BakaSU is not built in"
     grep -qx 'CONFIG_KSU_SUSFS=y' "$config" || fail "SUSFS is not enabled"
     grep -qx 'CONFIG_MQ_IOSCHED_ADIOS=y' "$config" || fail "ADIOS is not built in"
+    grep -qx 'CONFIG_MQ_IOSCHED_DEFAULT_ADIOS=y' "$config" || fail "ADIOS is not the default I/O scheduler"
     grep -qx 'CONFIG_TCP_CONG_BBR3=y' "$config" || fail "BBRv3 is not built in"
     grep -qx 'CONFIG_DEFAULT_TCP_CONG="bbr3"' "$config" || fail "BBRv3 is not the default TCP congestion control"
     grep -qx 'CONFIG_NET_SCH_FQ=y' "$config" || fail "FQ is not built in"

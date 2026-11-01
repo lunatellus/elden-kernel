@@ -1,6 +1,6 @@
 # Elden kernel
 
-独立构建 Elden 的 BakaSU + SUSFS 内核，默认使用 BBRv3 拥塞控制和 FQ 队列，生成 Image、AVB2 签名 boot 和 AnyKernel3 ZIP。
+独立构建 Elden 的 BakaSU + SUSFS 内核，默认使用 ADIOS I/O 调度器、BBRv3 拥塞控制和 FQ 队列，生成 Image、AVB2 签名 boot 和 AnyKernel3 ZIP。
 
 ## 构建
 
