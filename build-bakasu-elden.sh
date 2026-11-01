@@ -130,7 +130,7 @@ build_image() {
     mkdir "$DIST"
     (
         cd "$KERNEL"
-        ./tools/bazel run --config=stamp --jobs="$JOBS" --make_jobs="$JOBS" \
+        ./tools/bazel --local_startup_timeout_secs=600 run --config=stamp --jobs="$JOBS" --make_jobs="$JOBS" \
             --defconfig_fragment=//common:arch/arm64/configs/elden.fragment \
             //common:kernel_aarch64_dist -- --destdir="$DIST"
     )
