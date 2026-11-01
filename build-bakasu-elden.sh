@@ -118,6 +118,8 @@ check_config() {
     grep -qx 'CONFIG_KSU_SUSFS=y' "$config" || fail "SUSFS is not enabled"
     grep -qx 'CONFIG_TCP_CONG_BBR3=y' "$config" || fail "BBRv3 is not built in"
     grep -qx 'CONFIG_DEFAULT_TCP_CONG="bbr3"' "$config" || fail "BBRv3 is not the default TCP congestion control"
+    grep -qx 'CONFIG_NET_SCH_FQ=y' "$config" || fail "FQ is not built in"
+    grep -qx 'CONFIG_DEFAULT_NET_SCH="fq"' "$config" || fail "FQ is not the default qdisc"
     if grep -qx 'CONFIG_MODULE_SIG_PROTECT=y' "$config"; then
         fail "MODULE_SIG_PROTECT is still enabled"
     fi
